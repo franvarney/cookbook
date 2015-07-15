@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -50,27 +50,27 @@ class Recipe extends Model {
 	 */
 	public function comment()
 	{
-		return $this->belongsToMany('App\Comment');
+		return $this->belongsToMany('App\Models\Comment');
 	}
 
 	public function cookbook()
 	{
-	  return $this->belongsTo('App\Cookbook');
+	  return $this->belongsTo('App\Models\Cookbook');
 	}
 
 	public function tag()
 	{
-		return $this->belongsToMany('App\Tag')->withTimestamps();
+		return $this->belongsToMany('App\Models\Tag')->withTimestamps();
 	}
 
 	public function unit()
 	{
-		return $this->belongsTo('App\Unit');
+		return $this->belongsTo('App\Models\Unit');
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('App\User');
+		return $this->belongsTo('App\Models\User');
 	}
 
 }

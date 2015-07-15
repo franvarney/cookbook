@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -29,7 +29,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	*
 	* @var array
 	*/
-	protected $fillable = ['username', 'first_name', 'last_name' 'email', 'location', 'is_admin'];
+	protected $fillable = ['username', 'first_name', 'last_name', 'email', 'location', 'is_admin'];
 
 	/**
 	* The attributes excluded from the model's JSON form.
@@ -50,17 +50,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	*/
 	public function cookbook()
 	{
-		return $this->hasMany('App\Cookbook');
+		return $this->hasMany('App\Models\Cookbook');
 	}
 
 	public function receiver()
 	{
-		return $this->belongsTo('App\ContributorRequest', 'id', 'receiver_user_id');
+		return $this->belongsTo('App\Models\ContributorRequest', 'id', 'receiver_user_id');
 	}
 
 	public function sender()
 	{
-		return $this->belongsTo('App\ContributorRequest', 'id', 'sender_user_id');
+		return $this->belongsTo('App\Models\ContributorRequest', 'id', 'sender_user_id');
 	}
 
 }

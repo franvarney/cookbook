@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,7 +43,7 @@ class RecipeDirection extends Model {
 	 */
 	public function recipe()
 	{
-		return $this->belongsTo('App\Recipe');
+		return $this->belongsTo('App\Models\Recipe');
 	}
 
 }

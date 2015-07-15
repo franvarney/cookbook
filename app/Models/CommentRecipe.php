@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,12 +23,12 @@ class CommentRecipe extends Model {
 	 */
 	public function recipe()
 	{
-		return $this->belongsTo('App\Recipe');
+		return $this->belongsTo('App\Models\Recipe');
 	}
 
 	public function comment()
 	{
-		return $this->belongsTo('App\Comment');
+		return $this->belongsTo('App\Models\Comment');
 	}
 
 }

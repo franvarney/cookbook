@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,12 +43,12 @@ class ContributorPermission extends Model {
 	 */
 	public function contributor()
 	{
-		return $this->belongsTo('App\Contributor');
+		return $this->belongsTo('App\Models\Contributor');
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('App\User');
+		return $this->belongsTo('App\Models\User');
 	}
 
 }

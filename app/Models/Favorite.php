@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -17,7 +17,7 @@ class Favorite extends Model {
 	*
 	* @var array
 	*/
-	protected $guarded = ['id', 'deleted_at'];
+	protected $guarded = ['id'];
 
 	/**
 	 * The attributes that are mass assignable.
@@ -43,12 +43,12 @@ class Favorite extends Model {
 	 */
 	public function recipe()
 	{
-		return $this->belongsTo('Recipe');
+		return $this->belongsTo('App\Models\Recipe');
 	}
 
 	public function user()
 	{
-		return $this->belongsTo('User');
+		return $this->belongsTo('App\Models\User');
 	}
 
 }

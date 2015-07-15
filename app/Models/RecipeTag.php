@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,12 +23,12 @@ class RecipeTag extends Model {
 	 */
 	public function recipe()
 	{
-		return $this->belongsTo('App\Recipe');
+		return $this->belongsTo('App\Models\Recipe');
 	}
 
 	public function tag()
 	{
-		return $this->belongsTo('App\Tag');
+		return $this->belongsTo('App\Models\Tag');
 	}
 
 }

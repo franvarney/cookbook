@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -43,17 +43,17 @@ class ContributorRequest extends Model {
 	 */
 	public function cookbook()
 	{
-		return $this->belongsTo('App\Cookbook');
+		return $this->belongsTo('App\Models\Cookbook');
 	}
 
 	public function receiver()
 	{
-		return $this->belongsTo('App\User', 'receiver_user_id', 'id');
+		return $this->belongsTo('App\Models\User', 'receiver_user_id', 'id');
 	}
 
 	public function sender()
 	{
-		return $this->belongsTo('App\User', 'sender_user_id', 'id');
+		return $this->belongsTo('App\Models\User', 'sender_user_id', 'id');
 	}
 
 }

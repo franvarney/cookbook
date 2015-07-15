@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,7 +35,7 @@ class Ingredient extends Model {
 	 */
 	public function recipe_ingredient()
 	{
-		return $this->hasMany('RecipeIngredient');
+		return $this->hasMany('App\Models\RecipeIngredient');
 	}
 
 }
