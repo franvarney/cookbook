@@ -7,8 +7,8 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "laravelcollective/html": "~5.0",
-        "guzzlehttp/guzzle": "5.3"
+        "laravelcollective/html": "5.1.*",
+        "guzzlehttp/guzzle": "^6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -21,7 +21,8 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "App\\Models\\": "app/models"
         }
     },
     "autoload-dev": {
