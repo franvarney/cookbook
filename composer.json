@@ -8,7 +8,9 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
-        "guzzlehttp/guzzle": "^6.0"
+        "guzzlehttp/guzzle": "^6.0",
+        "league/fractal": "^0.12.0",
+        "laravelista/syndra": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -22,7 +24,11 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "App\\Models\\": "app/models"
+            "App\\Models\\": "app/models",
+            "App\\Providers\\Repositories\\": "app/Providers/Repositories",
+            "App\\RepositoryInterfaces\\": "app/Repositories/Interfaces",
+            "App\\Repositories\\": "app/Repositories",
+            "App\\Transformers\\": "app/Transformers"
         }
     },
     "autoload-dev": {
