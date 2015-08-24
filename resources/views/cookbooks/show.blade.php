@@ -6,6 +6,8 @@
 
     <div class="title">
       <h1>{!! $contents->cookbook->name !!}</h1>
+      <span><a href="{!! $contents->cookbook->url !!}/edit">Edit</a></span>
+      <span><a href="{!! $contents->cookbook->url !!}/delete">Delete</a></span>
     </div>
 
     <div>
@@ -20,7 +22,7 @@
       <ul>
         @foreach($contents->recipes as $recipe)
           <li class="col-md-4">
-            <h3 class="title">{!! $recipe->title !!}</h3>
+            <h3 class="title"><a href="{!! $recipe->url !!}">{!! $recipe->title !!}</a></h3>
             <p>By: <a href="{!! $recipe->creator->url !!}">{!! $recipe->creator->username !!}</a>
           </li>
         @endforeach
