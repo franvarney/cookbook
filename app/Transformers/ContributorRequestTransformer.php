@@ -1,12 +1,12 @@
 <?php namespace App\Transformers;
 
-use App\Models\ContributorRequest;
-use App\Transformers\CookbookTransformer;
-use App\Transformers\UserTransformer;
 use League\Fractal\Manager;
-use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
+use App\Models\ContributorRequest;
+use App\Transformers\UserTransformer;
 use League\Fractal\TransformerAbstract;
+use League\Fractal\Resource\Collection;
+use App\Transformers\CookbookTransformer;
 
 class ContributorRequestTransformer extends TransformerAbstract
 {
@@ -33,11 +33,13 @@ class ContributorRequestTransformer extends TransformerAbstract
 		$sender = $this->manager->createData($item)->toArray();
 
 		return [
-				'cookbook' => $cookbook['data'],
-				'receiver' => $receiver['data'],
-				'sender' => $sender['data'],
-				'created' => date('m/d/y', strtotime($request->created_at)),
-				'updated' => date('m/d/y', strtotime($request->updated_at))
-			];
+			'id' => $request->id,
+			'approved' => (bool) $request->approved,
+			'cookbook' => $cookbook['data'],
+			'receiver' => $receiver['data'],
+			'sender' => $sender['data'],
+			'created' => date('m/d/y', strtotime($request->created_at)),
+			'updated' => date('m/d/y', strtotime($request->updated_at))
+		];
 	}
 }

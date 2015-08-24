@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/', 'HomeController@show');
+
 // Api
 Route::group(['namespace' => 'Api', 'prefix' => '/api'], function()
 {
@@ -38,16 +40,25 @@ Route::group(['namespace' => 'Api', 'prefix' => '/api'], function()
 	Route::get('requests/{receiver_user_id}/receiver', 'ContributorRequestController@allByReceiver');
 	Route::get('requests/{sender_user_id}/sender', 'ContributorRequestController@allBySender');
 	Route::post('request', 'ContributorRequestController@store');
-	Route::put('request/{id}/approve', 'ContributorRequestController@approve');
+	Route::put('request/{id}/approve/{user_id}', 'ContributorRequestController@approve');
 	Route::put('request/{id}/deny', 'ContributorRequestController@deny');
 	Route::delete('request/{id}', 'ContributorRequestController@destroy');
 
 	// Cookbooks
+	Route::get('cookbooks/{user_id}/contributor', 'CookbookController@allIfContributor');
+	Route::get('cookbooks/{user_id}/contributor/list', 'CookbookController@allIfContributorList');
 	Route::get('cookbooks/{user_id}/user', 'CookbookController@allByUserId');
 	Route::get('cookbook/{id}', 'CookbookController@show');
 	Route::post('cookbook', 'CookbookController@store');
-	Route::put('cookbook', 'CookbookController@update');
+	Route::put('cookbook/{id}', 'CookbookController@update');
 	Route::delete('cookbook/{id}', 'CookbookController@destroy');
+
+	// Favorites
+	Route::get('favorite/{user_id}/{recipe_id}', 'FavoriteController@show');
+	Route::get('favorites/{user_id}/user', 'FavoriteController@allByUserId');
+	Route::get('favorites/{cookbook_id}/cookbook', 'FavoriteController@allByCookbookId');
+	Route::post('favorite/{user_id}/{recipe_id}', 'FavoriteController@store');
+	Route::delete('unfavorite/{id}', 'FavoriteController@destroy');
 
 	// Recipes
 	Route::get('recipes/{cookbook_id}/cookbook', 'RecipeController@allByCookbookId');
@@ -72,23 +83,32 @@ Route::get('user/{id}', 'UserController@show');
 
 // Cookbooks
 Route::get('cookbook/create', 'CookbookController@create');
+Route::get('user/{id}/cookbooks', 'CookbookController@index');
 Route::get('cookbook/{id}', 'CookbookController@show');
 Route::get('cookbook/{id}/edit', 'CookbookController@edit');
 Route::post('cookbook', 'CookbookController@store');
 Route::put('cookbook/{id}', 'CookbookController@update');
-Route::delete('cookbook/{id}', 'CookbookController@destroy');
+Route::get('cookbook/{id}/delete', 'CookbookController@destroy');
+
+// Favorites
+Route::get('favorites/{cookbook_id}/cookbook', 'FavoriteController@allByCookbookId');
+Route::get('favorites/{user_id}/user', 'FavoriteController@allByUserId');
+Route::get('favorite/{user_id}/{recipe_id}', 'FavoriteController@store');
+Route::get('unfavorite/{id}', 'FavoriteController@destroy');
 
 // Recipes
 Route::get('recipe/create', 'RecipeController@create');
+Route::get('recipe/import', 'RecipeController@importCreate');
 Route::get('recipe/{id}', 'RecipeController@show');
 Route::get('recipe/{id}/edit', 'RecipeController@edit');
 Route::post('recipe', 'RecipeController@store');
+Route::post('recipe/import', 'RecipeController@import');
 Route::put('recipe/{id}', 'RecipeController@update');
-Route::delete('recipe/{id}', 'RecipeController@destroy');
+Route::get('recipe/{id}/delete', 'RecipeController@destroy');
 
-
-
-// Route::get('session', function (\Illuminate\Http\Request $request) {
-//     // return Auth::user();
-//     return $request->session()->all();
-// });
+// Requests
+Route::get('requests/{user_id}', 'ContributorRequestController@index');
+Route::post('request', 'ContributorRequestController@store');
+Route::get('request/{id}/approve', 'ContributorRequestController@approve');
+Route::get('request/{id}/deny', 'ContributorRequestController@deny');
+Route::get('request/{id}/cancel', 'ContributorRequestController@cancel');

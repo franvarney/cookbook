@@ -2,18 +2,18 @@
 
 @section('content')
 
-  <div id="cookbook-create">
+  <div id="cookbook-edit">
 
     <div class="title">
-      <h1>Create Cookbook</h1>
+      <h1>Edit Cookbook</h1>
     </div>
 
-    {!! Form::open(array('url' => '/cookbook')) !!}
+    {!! Form::open(['url' => $contents->cookbook->url, 'method' => 'PUT']) !!}
       {!! Form::hidden('user_id', Auth::user()->id) !!}
       <ul>
-        <li>Name: {!! Form::text('name') !!}</li>
-        <li>Description: {!! Form::textarea('description') !!}</li>
-        <li>Public: {!! Form::checkbox('is_public') !!}</li>
+        <li>Name: {!! Form::text('name', $contents->cookbook->name) !!}</li>
+        <li>Description: {!! Form::textarea('description', $contents->cookbook->description) !!}</li>
+        <li>Public: {!! Form::checkbox('is_public', $contents->cookbook->public) !!}</li>
       </ul>
       <div class="button-wrap">
         <div class="button">

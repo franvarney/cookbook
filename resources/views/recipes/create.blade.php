@@ -10,31 +10,30 @@
 
     <div id="recipe-form-content">
 
-      <section class="col-md-3 left-column">
+      {!! Form::open(array('url' => '/recipe', 'class' => 'recipe-form', 'method' => 'POST')) !!}
+        <section class="col-md-3 left-column">
+          {!! Form::hidden('user_id', Auth::user()->id) !!}
+          {!! Form::select('cookbook_id', $contents->cookbooks, 'Choose...') !!}
+          <div class="sub-title">
+            <h2 class="dark">Details</h2>
+          </div>
+          <ul>
+            <li>Title: {!! Form::text('title') !!}</li>
+            <li>Prep Time: {!! Form::text('prep_time') !!} {!! Form::select('prep_time_units', array('seconds' => 'Seconds', 'minutes' => 'Minutes', 'hours' => 'Hours', 'days' => 'Days', 'weeks' => 'Weeks', 'months' => 'Months'), 'minutes') !!}</li>
+            <li>Cook Time: {!! Form::text('cook_time') !!} {!! Form::select('cook_time_units', array('seconds' => 'Seconds', 'minutes' => 'Minutes', 'hours' => 'Hours', 'days' => 'Days', 'weeks' => 'Weeks', 'months' => 'Months'), 'minutes') !!}</li>
+            <li>
+              Yields: {!! Form::text('yields_amount', null,
+                          array('placeholder' => 'amount')) !!}
+                      {!! Form::text('unit', null,
+                          array('placeholder' => 'units')) !!}
+            </li>
+            <li>Tags: {!! Form::text('recipe_tags') !!}</li>
+          </ul>
+        </section>
 
-      </section>
-
-      <section class="col-md-9 right-column">
-        <div id="recipe-form-wrap">{{-- See Reactjs --}}
-          {!! Form::open(array('url' => '/recipe', 'class' => 'recipe-form')) !!}
-            {!! Form::hidden('user_id', 1) !!}{{-- TODO Add auth id --}}
-            {!! Form::hidden('cookbook_id', 1) !!}{{-- TODO Add select list --}}
-            <div class="sub-title">
-              <h2 class="dark">Details</h2>
-            </div>
-            <ul>
-              <li>Title: {!! Form::text('title') !!}</li>
-              <li>Description: {!! Form::text('description') !!}</li>
-              <li>Prep Time: {!! Form::text('prep_time') !!}</li>
-              <li>Cook Time: {!! Form::text('cook_time') !!}</li>
-              <li>
-                Yields: {!! Form::text('yields_amount', null,
-                            array('placeholder' => 'amount')) !!}
-                        {!! Form::text('unit', null,
-                            array('placeholder' => 'units')) !!}
-              </li>
-              <li>Tags: {!! Form::text('recipe_tags') !!}</li>
-            </ul>
+        <section class="col-md-9 right-column">
+          <div id="recipe-form-wrap">
+            <p>Description: {!! Form::textarea('description') !!}</p>
 
             {{-- <div id="ingredient-wrap"></div> --}}
             {{-- <div id="direction-wrap"></div> --}}
@@ -75,9 +74,9 @@
                 {!! Form::reset('Clear', array('class' => 'btn')) !!}
               </div>
             </div>
-          {!! Form::close() !!}
-        </div>
-      </section>
+          </div>
+        </section>
+      {!! Form::close() !!}
     </div>
   </div>
 

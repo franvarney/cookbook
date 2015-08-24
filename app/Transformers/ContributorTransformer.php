@@ -1,12 +1,12 @@
 <?php namespace App\Transformers;
 
 use App\Models\Contributor;
-use App\Transformers\CookbookTransformer;
-use App\Transformers\RoleTransformer;
-use App\Transformers\UserTransformer;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
+use App\Transformers\RoleTransformer;
+use App\Transformers\UserTransformer;
 use League\Fractal\TransformerAbstract;
+use App\Transformers\CookbookTransformer;
 
 class ContributorTransformer extends TransformerAbstract
 {
@@ -35,11 +35,11 @@ class ContributorTransformer extends TransformerAbstract
 		$user = $this->manager->createData($item)->toArray();
 
 		return [
-				'contributor' => $user['data'],
-				'cookbook' => $cookbook['data'],
-				'role' => $role['data'],
-				'created' => date('m/d/y', strtotime($contributor->created_at)),
-				'updated' => date('m/d/y', strtotime($contributor->updated_at))
-			];
+			'contributor' => $user['data'],
+			'cookbook' => $cookbook['data'],
+			'role' => $role['data'],
+			'created' => date('m/d/y', strtotime($contributor->created_at)),
+			'updated' => date('m/d/y', strtotime($contributor->updated_at))
+		];
 	}
 }

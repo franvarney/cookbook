@@ -1,14 +1,14 @@
 <?php namespace App\Transformers;
 
 use App\Models\Recipe;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Item;
+use App\Transformers\UserTransformer;
+use League\Fractal\Resource\Collection;
+use League\Fractal\TransformerAbstract;
 use App\Transformers\CookbookTransformer;
 use App\Transformers\RecipeDirectionTransformer;
 use App\Transformers\RecipeIngredientTransformer;
-use App\Transformers\UserTransformer;
-use League\Fractal\Manager;
-use League\Fractal\Resource\Collection;
-use League\Fractal\Resource\Item;
-use League\Fractal\TransformerAbstract;
 
 class RecipeTransformer extends TransformerAbstract
 {
@@ -37,18 +37,19 @@ class RecipeTransformer extends TransformerAbstract
 
 	public function transform(Recipe $recipe)
 	{
-		$rec = array(
-				'title' => $recipe->title,
-				'description' => $recipe->description,
-				'prep_time' => $recipe->prep_time,
-				'cook_time' => $recipe->cook_time,
-				'yields' => $recipe->yields_amount . ' ' . $recipe->unit->unit,
-				'url' => '/recipe/' . $recipe->id,
-				'public' => (bool) $recipe->is_public,
-				//'tags' => $recipe->tags,
-				'created' => date('m/d/y', strtotime($recipe->created_at)),
-				'updated' => date('m/d/y', strtotime($recipe->updated_at))
-			);
+		$rec = [
+			'id' => $recipe->id,
+			'title' => $recipe->title,
+			'description' => $recipe->description,
+			'prep_time' => $recipe->prep_time,
+			'cook_time' => $recipe->cook_time,
+			'yields' => $recipe->yields_amount . ' ' . $recipe->unit->unit,
+			'url' => '/recipe/' . $recipe->id,
+			'public' => (bool) $recipe->is_public,
+			'tags' => $recipe->tags, // TODO - format tags
+			'created' => date('m/d/y', strtotime($recipe->created_at)),
+			'updated' => date('m/d/y', strtotime($recipe->updated_at))
+		];
 
 		$rec['cookbook'] = $this->transformExtra('item', $recipe->cookbook, $this->cookbook_transformer, $this->manager);
 		$rec['creator'] = $this->transformExtra('item', $recipe->user, $this->user_transformer, $this->manager);

@@ -15,6 +15,9 @@
       @yield('content')
     </div>
 
+    <!-- Footer -->
+    @include('partials/footer')
+
     <!-- Scripts -->
     @yield('before_scripts')
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

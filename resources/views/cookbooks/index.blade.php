@@ -10,22 +10,21 @@
 
     <div class="cookbooks">
       <ul>
-      @foreach($contents->cookbooks as $cookbook)
+      @foreach($contents->cookbooks as $key => $cookbook)
         <li>
-          <div class="col-md-4 image">
-            <img src="http://s3.amazonaws.com/gmi-digital-library/fb1058e3-3850-408e-8d4a-885e02dca10c.jpg" />
-          </div>
           <div class="col-md-8 details">
-            <h2 class="name"><a href="/cookbook/{!! $cookbook->cookbook->id !!}">{!! $cookbook->cookbook->name !!}</a></h2>
-            @if($cookbook->cookbook->description)
-              <p>{!! $cookbook->cookbook->description !!}</p>
+            <h2 class="name"><a href="{!! $cookbook->url !!}">{!! $cookbook->name !!}</a></h2>
+            @if($cookbook->description)
+              <p>{!! $cookbook->description !!}</p>
             @endif
-            Contributors: @foreach($cookbook->cookbook->contributors as $key => $contributor)
-              @if($contributor->user->id !== Auth::user()->id)
-                <a href="search/tag/{!! $contributor->user->username !!}">{!! $contributor->user->username !!}</a>@if($key + 1 !== count($cookbook->cookbook->contributors)),&nbsp;
+            <p>Contributors: 
+              @foreach($contents->contributors[$key] as $contributor_key => $contributor)
+                {!! $contributor->contributor->username !!}
+                @if($contributor_key + 1 != count($contents->contributors[$key]))
+                  {!! ', '!!}
                 @endif
-              @endif
-            @endforeach
+              @endforeach
+            </p>
           </div>
         </li>
       @endforeach

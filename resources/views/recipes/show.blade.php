@@ -6,6 +6,13 @@
     <div class="title">
       <h1>
         {!! $contents->recipe->title !!}
+        <p><a href="/recipe/{!! $contents->recipe->id !!}/edit">Edit</a></p>
+        <p><a href="/recipe/{!! $contents->recipe->id !!}/delete">Delete</a></p>
+        @if($contents->favorite)
+          <p><a href="/unfavorite/{!! $contents->favorite !!}">Unfavorite</a></p>
+        @else
+          <p><a href="/favorite/{!! Auth::user()->id !!}/{!! $contents->recipe->id !!}">Favorite</a></p>
+        @endif
       </h1>
     </div>
 

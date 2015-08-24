@@ -1,39 +1,27 @@
 <?php namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Repositories\ContributorRepository;
-use App\Transformers\ContributorTransformer;
-use Illuminate\Http\Response;
+use App\Models\Contributor;
 use League\Fractal\Manager;
+use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use League\Fractal\Resource\Collection;
+use App\Transformers\ContributorTransformer;
 use League\Fractal\Serializer\JsonApiSerializer;
 
 class ContributorController extends Controller
 {
 	public function __construct(
-			ContributorRepository $contributor_repo,
 			ContributorTransformer $contributor_transformer,
 			Manager $manager
 		)
 	{
-		$this->contributor = $contributor_repo;
 		$this->transformer = $contributor_transformer;
 		$this->manager = $manager->setSerializer(new JsonApiSerializer());
 	}
 
-	public function destroy($id)
-	{
-		$deleted = $this->contributor->destory($id);
-		if ( ! $deleted) {
-			return response(['errors' => 'Contributor not found!'], 404);
-		}
-
-		return response(['success' => 'Contributor deleted!'], 204);
-	}
-
 	public function allByCookbookId($cookbook_id)
 	{
-		$contributors = $this->contributor->allByCookbookId($cookbook_id);
+		$contributors = Contributor::where(['cookbook_id' => $cookbook_id])->get();
 		if ( ! $contributors) {
 			return response(['errors' => 'Contributors not found!'], 404);
 		}
@@ -55,5 +43,11 @@ class ContributorController extends Controller
 		$data = $this->manager->createData($items)->toArray();
 
 		return response($data, 200);
+	}
+
+	public function destroy($id)
+	{
+		Contributor::destroy($id);
+		return response(['success' => 'Contributor deleted!'], 204);
 	}
 }

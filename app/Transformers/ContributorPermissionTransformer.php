@@ -1,11 +1,11 @@
 <?php namespace App\Transformers;
 
-use App\Models\ContributorPermission;
-use App\Transformers\ContributorTransformer;
-use App\Transformers\UserTransformer;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Item;
+use App\Models\ContributorPermission;
+use App\Transformers\UserTransformer;
 use League\Fractal\TransformerAbstract;
+use App\Transformers\ContributorTransformer;
 
 class ContributorPermissionTransformer extends TransformerAbstract
 {
@@ -29,15 +29,15 @@ class ContributorPermissionTransformer extends TransformerAbstract
 		$user = $this->manager->createData($item)->toArray();
 
 		return [
-				'contributor' => $contributor['data']['contributor'],
-				'user' => $user['data'],
-				'can_add_contributors' => (bool) $permission->can_add_contributors,
-				'can_edit_cookbook' => (bool) $permission->can_edit_cookbook,
-				'can_delete_cookbook' => (bool) $permission->can_delete_cookbook,
-				'can_edit_recipe' => (bool) $permission->can_edit_recipe,
-				'can_delete_recipe' => (bool) $permission->can_delete_recipe,
-				'created' => date('m/d/y', strtotime($permission->created_at)),
-				'updated' => date('m/d/y', strtotime($permission->updated_at))
-			];
+			'contributor' => $contributor['data']['contributor'],
+			'user' => $user['data'],
+			'can_add_contributors' => (bool) $permission->can_add_contributors,
+			'can_edit_cookbook' => (bool) $permission->can_edit_cookbook,
+			'can_delete_cookbook' => (bool) $permission->can_delete_cookbook,
+			'can_edit_recipe' => (bool) $permission->can_edit_recipe,
+			'can_delete_recipe' => (bool) $permission->can_delete_recipe,
+			'created' => date('m/d/y', strtotime($permission->created_at)),
+			'updated' => date('m/d/y', strtotime($permission->updated_at))
+		];
 	}
 }

@@ -9,7 +9,7 @@ class RoleTransformer extends TransformerAbstract
 	public function transform(Role $role)
 	{
 		return [
-				$role->role
-			];
+			$role->role
+		];
 	}
 }
