@@ -10,7 +10,8 @@
         "laravelcollective/html": "5.1.*",
         "guzzlehttp/guzzle": "^6.0",
         "league/fractal": "^0.12.0",
-        "laravelista/syndra": "^1.0"
+        "laravelista/syndra": "^1.0",
+        "symfony/psr-http-message-bridge": "^0.2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
