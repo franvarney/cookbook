@@ -13,6 +13,7 @@
       <ul>
         <li>Name: {!! Form::text('name') !!}</li>
         <li>Description: {!! Form::textarea('description') !!}</li>
+        <li>Public: {!! Form::checkbox('is_public') !!}</li>
       </ul>
       <div class="button-wrap">
         <div class="button">
