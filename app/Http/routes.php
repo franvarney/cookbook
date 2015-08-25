@@ -71,8 +71,11 @@ Route::group(['namespace' => 'Api', 'prefix' => '/api'], function()
 });
 
 // Auth
+
 Route::group(['namespace' => 'Auth'], function()
 {
+	Route::get('register', 'AuthController@getRegister');
+	Route::get('register', 'AuthController@postRegister');
 	Route::get('login', 'AuthController@getLogin');
 	Route::post('login', 'AuthController@postLogin');
 	Route::get('logout', 'AuthController@getLogout');
