@@ -21,7 +21,7 @@ class ContributorRequestController extends Controller
     {
         $contents = new \StdClass;
 
-        $cookbook_response = $this->client->get(env('API_URL') . '/cookbooks/' . \Auth::user()->id . '/contributor');
+        $cookbook_response = $this->client->get(env('API_URL') . '/cookbooks/' . \Auth::user()->id . '/contributor/list');
         $contents->cookbooks = json_decode($cookbook_response->getBody());
 
         $received_response = $this->client->get(env('API_URL') . '/requests/' . \Auth::user()->id . '/receiver');
