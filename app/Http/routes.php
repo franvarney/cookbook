@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@show');
+Route::get('/home', 'HomeController@show'); // TODO figure out what is redirecting to this route and remove it
 
 // Api
 Route::group(['namespace' => 'Api', 'prefix' => '/api'], function()
