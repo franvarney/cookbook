@@ -131,8 +131,11 @@ class RecipeController extends Controller
 
         $regex_title = '/<h1 itemprop=name>(.*)<\/h1>/i';
         preg_match($regex_title, $output, $match);
-
-        $recipe->title = $match[1];
+        if( ! empty($match)) {
+            $recipe->title = $match[1];
+        } else {
+            return redirect('/recipe/import')->withInput()->with('message', 'Cannot parse contents of chosen url, please try another or use the <a href="/recipe/create">manual entry form</a>.');
+        }
 
         $regex_prep = '/<dt>Prep:<\/dt><dd>(.*)<\/dd>/i';
         preg_match($regex_prep, $output, $match);

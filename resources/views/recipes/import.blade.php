@@ -9,11 +9,19 @@
     </div>
 
     <div id="recipe-form-content">
+      @if(session('message'))
+        <div class="alert alert-danger">
+          <strong>Whoops!</strong> There were some problems with your input.<br><br>
+          <ul>
+            <li>{!! session('message') !!}</li>
+          </ul>
+        </div>
+      @endif
 
       {!! Form::open(array('url' => '/recipe/import', 'class' => 'recipe-form', 'method' => 'POST')) !!}
         <section class="col-md-3 left-column">
             <div>
-            {!! Form::text('url') !!}
+            Url: {!! Form::textarea('url') !!}
             </div>
 
             <div class="button-wrap">
