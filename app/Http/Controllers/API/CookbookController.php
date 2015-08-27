@@ -78,7 +78,7 @@ class CookbookController extends Controller
 			'user_id' => \Input::get('user_id'),
 			'name' => \Input::get('name'),
 			'description' => \Input::get('description'),
-			'is_public' => \Input::get('is_public')
+			'is_public' => \Input::get('is_public') == null ?  0 : \Input::get('is_public')
 		]);
 
 		if ( ! $cookbook->id) {
@@ -88,7 +88,7 @@ class CookbookController extends Controller
 		Contributor::create([
 			'user_id' => \Input::get('user_id'),
 			'cookbook_id' => $cookbook->id,
-			'role_id' => 2 // TODO - is this the right role?
+			'role_id' => 2
 		]);
 
 		return response()->json(['cookbook_id' => $cookbook->id], 201);
